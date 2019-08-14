@@ -52,6 +52,10 @@ namespace Astroids_Remake
         protected override void Initialize()
         {
             InitializeScreenSize();
+            InitializeGameStates();
+
+            CurrentState = PlayingState;
+            CurrentState.Initialize();
 
             base.Initialize();
         }
@@ -71,6 +75,15 @@ namespace Astroids_Remake
         }
 
         /// <summary>
+        /// Initializes the GameState Properties
+        /// </summary>
+        private void InitializeGameStates()
+        {
+            MenuState = new MenuState(this);
+            PlayingState = new PlayingState(this);
+        }
+
+        /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
@@ -79,7 +92,7 @@ namespace Astroids_Remake
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            CurrentState.LoadContent();
         }
 
         /// <summary>
