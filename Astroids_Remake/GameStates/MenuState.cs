@@ -25,7 +25,7 @@ namespace Astroids_Remake.GameStates
             throw new NotImplementedException();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,7 @@
-﻿using Astroids_Remake.GameStates;
+﻿using Astroids_Remake.GameLogic.Input;
+using Astroids_Remake.GameStates;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +10,8 @@ namespace Astroids_Remake
     public interface IGame: IGameSize, IGameStates
     {
         GraphicsDevice GraphicsDevice { get; }
+        ContentManager Content { get; }
+        Input Input { get; }
     }
 
     public interface IGameSize
@@ -33,6 +37,7 @@ namespace Astroids_Remake
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
+        public Input Input { get; private set; }
         public GameState CurrentState { get; private set; }
         public GameState MenuState { get; private set; }
         public GameState PlayingState { get; private set; }
@@ -53,9 +58,7 @@ namespace Astroids_Remake
         {
             InitializeScreenSize();
             InitializeGameStates();
-
-            CurrentState = PlayingState;
-            CurrentState.Initialize();
+            InitializeInput();
 
             base.Initialize();
         }
@@ -81,6 +84,17 @@ namespace Astroids_Remake
         {
             MenuState = new MenuState(this);
             PlayingState = new PlayingState(this);
+
+            CurrentState = PlayingState;
+            CurrentState.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes the Input Properties
+        /// </summary>
+        private void InitializeInput()
+        {
+            Input = new Input(new ArrowControls());
         }
 
         /// <summary>
@@ -114,7 +128,8 @@ namespace Astroids_Remake
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            Input.Update();
+            CurrentState.Update((float)(gameTime.ElapsedGameTime.TotalMilliseconds / 1000));
 
             base.Update(gameTime);
         }

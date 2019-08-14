@@ -41,6 +41,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Entities\Entity.cs" />
+    <Compile Include="Components\Entities\EntityManager.cs" />
+    <Compile Include="Components\Entities\Player.cs" />
+    <Compile Include="Extra\LayerDepth.cs" />
+    <Compile Include="Input\Input.cs" />
+    <Compile Include="Input\IControls.cs" />
     <Compile Include="GameStates\MenuState.cs" />
     <Compile Include="GameStates\PlayingState.cs" />
     <Compile Include="MyGame.cs" />

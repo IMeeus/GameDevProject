@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Astroids_Remake.Components.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -13,27 +14,39 @@ namespace Astroids_Remake.GameStates
     /// </summary>
     public class PlayingState : GameState
     {
+        // Entities
+        private EntityManager _entityManager;
+        private Player _player;
+
         public PlayingState(IGame game) : base(game) { }
 
         public override void Initialize()
         {
-            throw new NotImplementedException();
+            _entityManager = new EntityManager();
         }
 
         public override void LoadContent()
         {
-            throw new NotImplementedException();
+            _game.Content.Unload();
+
+            _player = new Player(_game.Content.Load<Texture2D>("player"), _game.Input)
+            {
+                Position = new Vector2(_game.ScreenWidth / 2, _game.ScreenHeight / 2)
+            };
+
+            _entityManager.AddEntity(_player);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            _entityManager.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             _game.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
+            _entityManager.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

@@ -36,13 +36,13 @@ namespace Astroids_Remake.GameStates
         /// <summary>
         /// Allows the gamestate to run logic.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public abstract void Update(GameTime gameTime);
+        /// <param name="deltaTime">The deltatime of the last gamecycle.</param>
+        public abstract void Update(float deltaTime);
 
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        /// <param name="spriteBatch">The spritebatch that is used to draw on the screen</param>
+        /// <param name="spriteBatch">The spritebatch that is used to draw to the screen.</param>
         public abstract void Draw(SpriteBatch spriteBatch);
     }
 }
