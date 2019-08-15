@@ -1,4 +1,6 @@
-﻿using Astroids_Remake.GameLogic.Input;
+﻿using Astroids_Remake.Components.Entities.Laser;
+using Astroids_Remake.Extra;
+using Astroids_Remake.GameLogic.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -16,10 +18,12 @@ namespace Astroids_Remake.Components.Entities
     public class Player : Entity
     {
         private readonly Input _input;
+        private readonly ILaserFactory _laserFactory;
 
-        public Player(Texture2D texture, Input input)
+        public Player(Texture2D texture, Input input, ILaserFactory laserFactory)
         {
             _input = input;
+            _laserFactory = laserFactory;
 
             Texture = texture;
             Rotation = 0f;
@@ -56,7 +60,7 @@ namespace Astroids_Remake.Components.Entities
                 Origin,
                 1,
                 SpriteEffects.None,
-                0);
+                LayerDepth.MAIN);
         }
 
         /// <summary>
@@ -85,6 +89,7 @@ namespace Astroids_Remake.Components.Entities
             if (ShootCooldown > 0)
                 return;
 
+            _laserFactory.SpawnLaser(LaserType.STRONG, Position, Rotation);
             ShootCooldown = .2f;
         }
     }

@@ -7,10 +7,22 @@ using System.Threading.Tasks;
 
 namespace Astroids_Remake.GameLogic.Input
 {
+    public interface IInput
+    {
+        bool UpHold { get; }
+        bool DownHold { get; }
+        bool LeftHold { get; }
+        bool RightHold { get; }
+        bool ShootHold { get; }
+        bool ShootPress { get; }
+        void Update();
+        void SetControls(IControls newControls);
+    }
+
     /// <summary>
     /// An input 'interface' that holds all the possible input events.
     /// </summary>
-    public class Input
+    public class Input : IInput
     {
         private KeyboardState _keyState, _oldKeyState;
         private IControls _controls;

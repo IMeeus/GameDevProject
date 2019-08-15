@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Components\Entities\Entity.cs" />
     <Compile Include="Components\Entities\EntityManager.cs" />
+    <Compile Include="Components\Entities\Laser\Laser.cs" />
+    <Compile Include="Components\Entities\Laser\LaserFactory.cs" />
     <Compile Include="Components\Entities\Player.cs" />
     <Compile Include="Extra\LayerDepth.cs" />
+    <Compile Include="Extra\TextureHolder.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Input\IControls.cs" />
     <Compile Include="GameStates\MenuState.cs" />

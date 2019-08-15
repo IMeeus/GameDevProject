@@ -1,9 +1,12 @@
-﻿using Astroids_Remake.GameLogic.Input;
+﻿using Astroids_Remake.Extra;
+using Astroids_Remake.GameLogic.Input;
 using Astroids_Remake.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Astroids_Remake
 {
@@ -94,7 +97,7 @@ namespace Astroids_Remake
         /// </summary>
         private void InitializeInput()
         {
-            Input = new Input(new ArrowControls());
+            Input = new Input(new AzertyControls());
         }
 
         /// <summary>
@@ -109,13 +112,15 @@ namespace Astroids_Remake
             CurrentState.LoadContent();
         }
 
+        
+
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>
@@ -151,6 +156,8 @@ namespace Astroids_Remake
         /// <param name="newGameState">The new state of the game</param>
         public void SetState(GameState newGameState)
         {
+            UnloadContent();
+
             CurrentState = newGameState;
             CurrentState.Initialize();
             CurrentState.LoadContent();

@@ -7,12 +7,20 @@ using System.Threading.Tasks;
 
 namespace Astroids_Remake.Components.Entities
 {
+    public interface IEntityManager
+    {
+        void AddEntity(Entity newEntity);
+        void Update(float deltaTime);
+        void Draw(SpriteBatch spriteBatch);
+        void Clear();
+    }
+
     /// <summary>
     /// Manages all the game entities.
     /// </summary>
-    public class EntityManager
+    public class EntityManager : IEntityManager
     {
-        private List<Entity> _entities;
+        private readonly List<Entity> _entities;
 
         public EntityManager()
         {
@@ -21,13 +29,18 @@ namespace Astroids_Remake.Components.Entities
 
         public IEnumerable<Entity> Entities => _entities;
 
+        public void AddEntity(Entity newEntity)
+        {
+            _entities.Add(newEntity);
+        }
+
         /// <summary>
         /// Updates all the entities that haven't been destoyed.
         /// </summary>
         /// <param name="deltaTime">The deltatime of the last gamecycle.</param>
         public void Update(float deltaTime)
         {
-            foreach (var entity in _entities.Where(e => !e.IsDestroyed))
+            foreach (var entity in _entities.Where(e => !e.IsDestroyed).ToList())
                 entity.Update(deltaTime);
 
             _entities.RemoveAll(e => e.IsDestroyed);
@@ -39,13 +52,8 @@ namespace Astroids_Remake.Components.Entities
         /// <param name="spriteBatch">The spritebatch that is used to draw to the screen.</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var entity in _entities.Where(e => !e.IsDestroyed))
+            foreach (var entity in _entities.Where(e => !e.IsDestroyed).ToList())
                 entity.Draw(spriteBatch);
-        }
-
-        public void AddEntity(Entity newEntity)
-        {
-            _entities.Add(newEntity);
         }
 
         /// <summary>

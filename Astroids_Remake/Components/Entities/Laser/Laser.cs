@@ -3,20 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Astroids_Remake.Extra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Astroids_Remake.Components.Entities.Laser
 {
-    public class Laser : Entity
+    public abstract class Laser : Entity
     {
+        public Laser(Vector2 position, float rotation)
+        {
+            Rotation = rotation;
+            TimeToLive = 1f;
+            Position = position;
+        }
+
+        public int Damage { get; protected set; }
+        public float Rotation { get; private set; }
+        public float LinearVelocity { get; protected set; }
+        public float TimeToLive { get; private set; }
+        public Texture2D Texture { get; protected set; }
+        public Vector2 Position { get; set; }
+        public Vector2 Origin => new Vector2(Texture.Width / 2, Texture.Height / 2);
+        public Vector2 Direction => new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
+
         public override void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            Position += Direction * LinearVelocity * deltaTime;
+
+            TimeToLive -= deltaTime;
+            if (TimeToLive <= 0)
+                Destroy();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            spriteBatch.Draw(Texture,
+                Position,
+                null,
+                Color.White,
+                Rotation,
+                Origin,
+                1,
+                SpriteEffects.None,
+                LayerDepth.MAIN);
+        }
+    }
+
+    public class WeakLaser : Laser
+    {
+        public WeakLaser(Vector2 position, float rotation) : base(position, rotation)
+        {
+            Damage = 1;
+            LinearVelocity = 500f;
+            Texture = TextureHolder.LaserTextures[LaserType.LIGHT];
+        }
+    }
+
+    public class MediumLaser : Laser
+    {
+        public MediumLaser(Vector2 position, float rotation) : base(position, rotation)
+        {
+            Damage = 2;
+            LinearVelocity = 750f;
+            Texture = TextureHolder.LaserTextures[LaserType.MEDIUM];
+        }
+    }
+
+    public class StrongLaser : Laser
+    {
+        public StrongLaser(Vector2 position, float rotation) : base(position, rotation)
+        {
+            Damage = 3;
+            LinearVelocity = 1000f;
+            Texture = TextureHolder.LaserTextures[LaserType.STRONG];
         }
     }
 }

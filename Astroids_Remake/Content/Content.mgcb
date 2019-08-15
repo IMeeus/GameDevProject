@@ -13,6 +13,66 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../../../../../../Desktop/Asteroids/lasers/bullet_light.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/lasers/bullet_light.png;bullet_light.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/meteors/meteor_big.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/meteors/meteor_big.png;meteor_big.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/meteors/meteor_med.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/meteors/meteor_med.png;meteor_med.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/meteors/meteor_small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/meteors/meteor_small.png;meteor_small.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/meteors/meteor_tiny.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/meteors/meteor_tiny.png;meteor_tiny.png
+
 #begin ../../../../../../../../../Desktop/Asteroids/player.png
 /importer:TextureImporter
 /processor:TextureProcessor
