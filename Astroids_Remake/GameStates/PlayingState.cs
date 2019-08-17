@@ -1,5 +1,8 @@
 ﻿using Astroids_Remake.Components.Entities;
 using Astroids_Remake.Components.Entities.Laser;
+using Astroids_Remake.Components.Entities.Meteor;
+using Astroids_Remake.Components.Entities.Player;
+using Astroids_Remake.Components.Levels;
 using Astroids_Remake.Extra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +22,12 @@ namespace Astroids_Remake.GameStates
     {
         // Entities
         private IEntityManager _entityManager;
+        private IMeteorFactory _meteorFactory;
         private Player _player;
+
+        // Levels
+        private ILevelManager _levelManager;
+        private ILevelFactory _levelFactory;
 
         public PlayingState(IGame game) : base(game) { }
 
@@ -34,6 +42,7 @@ namespace Astroids_Remake.GameStates
 
             LoadTextures();
             LoadPlayer();
+            LoadLevels();
         }
 
         /// <summary>
@@ -42,45 +51,70 @@ namespace Astroids_Remake.GameStates
         private void LoadTextures()
         {
             TextureHolder.PlayerTexture = _game.Content.Load<Texture2D>("player");
-            Debug.WriteLine("STEP 1");
-            TextureHolder.LaserTextures = new Dictionary<LaserType, Texture2D>()
+            TextureHolder.LaserTextures = new Dictionary<string, Texture2D>()
             {
                 {
-                    LaserType.LIGHT, _game.Content.Load<Texture2D>("bullet_light")
+                    "light", _game.Content.Load<Texture2D>("bullet_light")
                 },
                 {
-                    LaserType.MEDIUM, _game.Content.Load<Texture2D>("bullet_light")
+                    "medium", _game.Content.Load<Texture2D>("bullet_light")
                 },
                 {
-                    LaserType.STRONG, _game.Content.Load<Texture2D>("bullet_light")
+                    "strong", _game.Content.Load<Texture2D>("bullet_light")
                 }
             };
 
-            TextureHolder.MeteorTextures = new Dictionary<MeteorType, Texture2D>()
+            TextureHolder.MeteorTextures = new Dictionary<string, Texture2D>()
             {
                 {
-                    MeteorType.TINY, _game.Content.Load<Texture2D>("meteor_tiny")
+                    "tiny", _game.Content.Load<Texture2D>("meteor_tiny")
                 },
                 {
-                    MeteorType.SMALL, _game.Content.Load<Texture2D>("meteor_small")
+                    "small", _game.Content.Load<Texture2D>("meteor_small")
                 },
                 {
-                    MeteorType.MEDIUM, _game.Content.Load<Texture2D>("meteor_med")
+                    "medium", _game.Content.Load<Texture2D>("meteor_med")
                 },
                 {
-                    MeteorType.BIG, _game.Content.Load<Texture2D>("meteor_big")
+                    "big", _game.Content.Load<Texture2D>("meteor_big")
+                }
+            };
+
+            TextureHolder.BackgroundTextures = new Dictionary<string, Texture2D>()
+            {
+                {
+                    "planet_blue", _game.Content.Load<Texture2D>("planet_blue")
+                },
+                {
+                    "planet_brown", _game.Content.Load<Texture2D>("planet_brown")
+                },
+                {
+                    "planet_red", _game.Content.Load<Texture2D>("planet_red")
                 }
             };
         }
 
         /// <summary>
-        /// Voegt een speler toe aan de entity manager.
+        /// Loads all levels into the level manager.
+        /// </summary>
+        private void LoadLevels()
+        {
+            _levelManager = new LevelManager();
+            _meteorFactory = new MeteorFactory(_entityManager, _game);
+            _levelFactory = new MeteorLevelFactory(_entityManager, _meteorFactory, _game);
+            _levelManager.EnqueueLevel(_levelFactory.CreateLevel(LevelDifficulty.EASY));
+            _levelManager.EnqueueLevel(_levelFactory.CreateLevel(LevelDifficulty.NORMAL));
+            _levelManager.EnqueueLevel(_levelFactory.CreateLevel(LevelDifficulty.HARD));
+        }
+
+        /// <summary>
+        /// Adds a player entity to the entity manager
         /// </summary>
         private void LoadPlayer()
         {
             _player = new Player(TextureHolder.PlayerTexture, _game.Input, new LaserFactory(_entityManager))
             {
-                Position = new Vector2(_game.ScreenWidth / 2, _game.ScreenHeight / 2)
+                Position = _game.Center
             };
 
             _entityManager.AddEntity(_player);
@@ -89,6 +123,7 @@ namespace Astroids_Remake.GameStates
         public override void Update(float deltaTime)
         {
             _entityManager.Update(deltaTime);
+            _levelManager.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -96,6 +131,7 @@ namespace Astroids_Remake.GameStates
             _game.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack);
             _entityManager.Draw(spriteBatch);
+            _levelManager.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

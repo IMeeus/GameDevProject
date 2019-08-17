@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Astroids_Remake.Components.Entities
+namespace Astroids_Remake.Components.Entities.Player
 {
     /// <summary>
-    /// Describes the behaviour of a player entity.
+    /// Describes a player entity.
     /// </summary>
     public class Player : Entity
     {

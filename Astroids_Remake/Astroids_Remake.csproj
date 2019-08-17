@@ -45,9 +45,18 @@
     <Compile Include="Components\Entities\EntityManager.cs" />
     <Compile Include="Components\Entities\Laser\Laser.cs" />
     <Compile Include="Components\Entities\Laser\LaserFactory.cs" />
-    <Compile Include="Components\Entities\Player.cs" />
+    <Compile Include="Components\Entities\Meteor\Meteor.cs" />
+    <Compile Include="Components\Entities\Meteor\MeteorFactory.cs" />
+    <Compile Include="Components\Entities\Player\Player.cs" />
+    <Compile Include="Components\Levels\Level.cs" />
+    <Compile Include="Components\Levels\LevelFactory.cs" />
+    <Compile Include="Components\Levels\LevelManager.cs" />
+    <Compile Include="Extra\Background.cs" />
+    <Compile Include="Extra\Circle.cs" />
     <Compile Include="Extra\LayerDepth.cs" />
+    <Compile Include="Extra\ScreenLocation.cs" />
     <Compile Include="Extra\TextureHolder.cs" />
+    <Compile Include="Extra\VectorHelper.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Input\IControls.cs" />
     <Compile Include="GameStates\MenuState.cs" />
@@ -56,6 +65,7 @@
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\ISystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

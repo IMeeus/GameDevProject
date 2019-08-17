@@ -16,7 +16,7 @@ namespace Astroids_Remake.Components.Entities.Laser
     }
 
     /// <summary>
-    /// Controleert de creatie van laser entities.
+    /// Controls the creation of laser entities.
     /// </summary>
     public class LaserFactory : ILaserFactory
     {
@@ -28,7 +28,7 @@ namespace Astroids_Remake.Components.Entities.Laser
         }
 
         /// <summary>
-        /// Voegt een laser entity toe aan de entity manager.
+        /// Adds a new laser to the entityManager.
         /// </summary>
         /// <param name="type">Het type laser</param>
         /// <param name="position">De positie van de laser</param>

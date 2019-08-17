@@ -9,6 +9,8 @@ namespace Astroids_Remake.Components.Entities
 {
     public interface IEntityManager
     {
+        List<Entity> Entities { get; }
+
         void AddEntity(Entity newEntity);
         void Update(float deltaTime);
         void Draw(SpriteBatch spriteBatch);
@@ -20,18 +22,16 @@ namespace Astroids_Remake.Components.Entities
     /// </summary>
     public class EntityManager : IEntityManager
     {
-        private readonly List<Entity> _entities;
-
         public EntityManager()
         {
-            _entities = new List<Entity>();
+            Entities = new List<Entity>();
         }
 
-        public IEnumerable<Entity> Entities => _entities;
+        public List<Entity> Entities { get; private set; }
 
         public void AddEntity(Entity newEntity)
         {
-            _entities.Add(newEntity);
+            Entities.Add(newEntity);
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace Astroids_Remake.Components.Entities
         /// <param name="deltaTime">The deltatime of the last gamecycle.</param>
         public void Update(float deltaTime)
         {
-            foreach (var entity in _entities.Where(e => !e.IsDestroyed).ToList())
+            foreach (var entity in Entities.Where(e => !e.IsDestroyed).ToList())
                 entity.Update(deltaTime);
 
-            _entities.RemoveAll(e => e.IsDestroyed);
+            Entities.RemoveAll(e => e.IsDestroyed);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Astroids_Remake.Components.Entities
         /// <param name="spriteBatch">The spritebatch that is used to draw to the screen.</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var entity in _entities.Where(e => !e.IsDestroyed).ToList())
+            foreach (var entity in Entities.Where(e => !e.IsDestroyed).ToList())
                 entity.Draw(spriteBatch);
         }
 
@@ -61,7 +61,7 @@ namespace Astroids_Remake.Components.Entities
         /// </summary>
         public void Clear()
         {
-            _entities.Clear();
+            Entities.Clear();
         }
     }
 }

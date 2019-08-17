@@ -10,17 +10,18 @@ using System.Diagnostics;
 
 namespace Astroids_Remake
 {
-    public interface IGame: IGameSize, IGameStates
+    public interface IGame: IGameDimensions, IGameStates
     {
         GraphicsDevice GraphicsDevice { get; }
         ContentManager Content { get; }
         Input Input { get; }
     }
 
-    public interface IGameSize
+    public interface IGameDimensions
     {
         int ScreenWidth { get; }
         int ScreenHeight { get; }
+        Vector2 Center { get; }
     }
 
     public interface IGameStates
@@ -40,6 +41,7 @@ namespace Astroids_Remake
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
+        public Vector2 Center => new Vector2(ScreenWidth / 2, ScreenHeight / 2);
         public Input Input { get; private set; }
         public GameState CurrentState { get; private set; }
         public GameState MenuState { get; private set; }

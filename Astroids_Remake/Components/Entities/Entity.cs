@@ -29,7 +29,7 @@ namespace Astroids_Remake.Components.Entities
         /// <summary>
         /// Draws the entity to the screen.
         /// </summary>
-        /// <param name="spriteBatch">The spritebatch that is used to draw to the screen.</param>
+        /// <param name="spriteBatch">The spritebatch that is used to draw on the screen.</param>
         public abstract void Draw(SpriteBatch spriteBatch);
 
         /// <summary>

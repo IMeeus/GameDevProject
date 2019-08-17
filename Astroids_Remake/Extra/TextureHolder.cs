@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Astroids_Remake.Components.Entities.Laser;
+using Astroids_Remake.Components.Entities.Meteor;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -17,8 +19,9 @@ namespace Astroids_Remake.Extra
     public static class TextureHolder
     {
         public static Texture2D PlayerTexture { get; set; }
-        public static Dictionary<LaserType, Texture2D> LaserTextures { get; set; } = new Dictionary<LaserType, Texture2D>();
-        public static Dictionary<MeteorType, Texture2D> MeteorTextures { get; set; } = new Dictionary<MeteorType, Texture2D>();
+        public static Dictionary<string, Texture2D> LaserTextures { get; set; } = new Dictionary<string, Texture2D>();
+        public static Dictionary<string, Texture2D> MeteorTextures { get; set; } = new Dictionary<string, Texture2D>();
+        public static Dictionary<string, Texture2D> BackgroundTextures { get; set; } = new Dictionary<string, Texture2D>();
 
         /// <summary>
         /// Maakt alle properties leeg.
@@ -28,16 +31,7 @@ namespace Astroids_Remake.Extra
             PlayerTexture = null;
             LaserTextures.Clear();
             MeteorTextures.Clear();
+            BackgroundTextures.Clear();
         }
-    }
-
-    public enum LaserType
-    {
-        LIGHT, MEDIUM, STRONG
-    }
-
-    public enum MeteorType
-    {
-        TINY, SMALL, MEDIUM, BIG
     }
 }
