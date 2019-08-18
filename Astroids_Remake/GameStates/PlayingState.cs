@@ -4,6 +4,8 @@ using Astroids_Remake.Components.Entities.Meteor;
 using Astroids_Remake.Components.Entities.Player;
 using Astroids_Remake.Components.Levels;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Systems;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -29,6 +31,9 @@ namespace Astroids_Remake.GameStates
         private ILevelManager _levelManager;
         private ILevelFactory _levelFactory;
 
+        // Systems
+        private ISystemManager _systemManager;
+
         public PlayingState(IGame game) : base(game) { }
 
         public override void Initialize()
@@ -43,6 +48,7 @@ namespace Astroids_Remake.GameStates
             LoadTextures();
             LoadPlayer();
             LoadLevels();
+            LoadSystems();
         }
 
         /// <summary>
@@ -50,48 +56,18 @@ namespace Astroids_Remake.GameStates
         /// </summary>
         private void LoadTextures()
         {
-            TextureHolder.PlayerTexture = _game.Content.Load<Texture2D>("player");
-            TextureHolder.LaserTextures = new Dictionary<string, Texture2D>()
-            {
-                {
-                    "light", _game.Content.Load<Texture2D>("bullet_light")
-                },
-                {
-                    "medium", _game.Content.Load<Texture2D>("bullet_light")
-                },
-                {
-                    "strong", _game.Content.Load<Texture2D>("bullet_light")
-                }
-            };
-
-            TextureHolder.MeteorTextures = new Dictionary<string, Texture2D>()
-            {
-                {
-                    "tiny", _game.Content.Load<Texture2D>("meteor_tiny")
-                },
-                {
-                    "small", _game.Content.Load<Texture2D>("meteor_small")
-                },
-                {
-                    "medium", _game.Content.Load<Texture2D>("meteor_med")
-                },
-                {
-                    "big", _game.Content.Load<Texture2D>("meteor_big")
-                }
-            };
-
-            TextureHolder.BackgroundTextures = new Dictionary<string, Texture2D>()
-            {
-                {
-                    "planet_blue", _game.Content.Load<Texture2D>("planet_blue")
-                },
-                {
-                    "planet_brown", _game.Content.Load<Texture2D>("planet_brown")
-                },
-                {
-                    "planet_red", _game.Content.Load<Texture2D>("planet_red")
-                }
-            };
+            TextureHolder.AddTexture("player", _game.Content.Load<Texture2D>("player"));
+            TextureHolder.AddTexture("explosion", _game.Content.Load<Texture2D>("explosion1"));
+            TextureHolder.AddTexture("bullet_light", _game.Content.Load<Texture2D>("bullet_light"));
+            TextureHolder.AddTexture("bullet_medium", _game.Content.Load<Texture2D>("bullet_medium"));
+            TextureHolder.AddTexture("bullet_heavy", _game.Content.Load<Texture2D>("bullet_heavy"));
+            TextureHolder.AddTexture("meteor_tiny", _game.Content.Load<Texture2D>("meteor_tiny"));
+            TextureHolder.AddTexture("meteor_small", _game.Content.Load<Texture2D>("meteor_small"));
+            TextureHolder.AddTexture("meteor_medium", _game.Content.Load<Texture2D>("meteor_med"));
+            TextureHolder.AddTexture("meteor_big", _game.Content.Load<Texture2D>("meteor_big"));
+            TextureHolder.AddTexture("planet_blue", _game.Content.Load<Texture2D>("planet_blue"));
+            TextureHolder.AddTexture("planet_brown", _game.Content.Load<Texture2D>("planet_brown"));
+            TextureHolder.AddTexture("planet_red", _game.Content.Load<Texture2D>("planet_red"));
         }
 
         /// <summary>
@@ -107,12 +83,19 @@ namespace Astroids_Remake.GameStates
             _levelManager.EnqueueLevel(_levelFactory.CreateLevel(LevelDifficulty.HARD));
         }
 
+        private void LoadSystems()
+        {
+            _systemManager = new SystemManager();
+            _systemManager.AddSystem(new BorderSystem(_entityManager, _game));
+            _systemManager.AddSystem(new CollisionSystem(_entityManager, _meteorFactory));
+        }
+
         /// <summary>
         /// Adds a player entity to the entity manager
         /// </summary>
         private void LoadPlayer()
         {
-            _player = new Player(TextureHolder.PlayerTexture, _game.Input, new LaserFactory(_entityManager))
+            _player = new Player(TextureHolder.Textures["player"], _game.Input, new LaserFactory(_entityManager))
             {
                 Position = _game.Center
             };
@@ -124,6 +107,7 @@ namespace Astroids_Remake.GameStates
         {
             _entityManager.Update(deltaTime);
             _levelManager.Update(deltaTime);
+            _systemManager.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -1,6 +1,7 @@
 ﻿using Astroids_Remake.Components.Entities;
 using Astroids_Remake.Components.Entities.Meteor;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -43,7 +44,7 @@ namespace Astroids_Remake.Components.Levels
 
         private Level CreateEasyLevel()
         {
-            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.BackgroundTextures["planet_blue"], ScreenLocation.BOTTOMLEFT, _gameDimensions));
+            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.Textures["planet_blue"], ScreenLocation.BOTTOMLEFT, _gameDimensions));
 
             for (int i = 0; i < 3; i++)
                 level.AddEntity(_meteorFactory.CreateMeteor(MeteorType.BIG, false));
@@ -53,7 +54,7 @@ namespace Astroids_Remake.Components.Levels
 
         private Level CreateNormalLevel()
         {
-            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.BackgroundTextures["planet_brown"], ScreenLocation.TOPRIGHT, _gameDimensions));
+            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.Textures["planet_brown"], ScreenLocation.TOPRIGHT, _gameDimensions));
 
             for (int i = 0; i < 5; i++)
                 level.AddEntity(_meteorFactory.CreateMeteor(MeteorType.BIG, false));
@@ -63,7 +64,7 @@ namespace Astroids_Remake.Components.Levels
 
         private Level CreateHardLevel()
         {
-            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.BackgroundTextures["planet_red"], ScreenLocation.TOPRIGHT, _gameDimensions));
+            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.Textures["planet_red"], ScreenLocation.TOPRIGHT, _gameDimensions));
 
             for (int i = 0; i < 8; i++)
                 level.AddEntity(_meteorFactory.CreateMeteor(MeteorType.BIG, false));

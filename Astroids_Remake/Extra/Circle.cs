@@ -11,15 +11,15 @@ namespace Astroids_Remake.Extra
     {
         public float Radius { get; set; }
         public float Diameter => Radius * 2;
-        public float Right => Position.X + Radius;
-        public float Left => Position.X - Radius;
-        public float Top => Position.Y - Radius;
-        public float Bottom => Position.Y + Radius;
-        public Vector2 Position { get; set; }
+        public float Right => Center.X + Radius;
+        public float Left => Center.X - Radius;
+        public float Top => Center.Y - Radius;
+        public float Bottom => Center.Y + Radius;
+        public Vector2 Center { get; set; }
 
-        public Circle(Vector2 position, float radius)
+        public Circle(Vector2 center, float radius)
         {
-            Position = position;
+            Center = center;
             Radius = radius;
         }
     }

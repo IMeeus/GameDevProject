@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -37,6 +38,7 @@ namespace Astroids_Remake.Components.Entities.Laser
         public Vector2 Position { get; set; }
         public Vector2 Origin => new Vector2(Texture.Width / 2, Texture.Height / 2);
         public Vector2 Direction => new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
+        public Rectangle BoundingRectangle => new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
         public override void Update(float deltaTime)
         {
@@ -64,13 +66,13 @@ namespace Astroids_Remake.Components.Entities.Laser
     /// <summary>
     /// Describes a weak laser entity.
     /// </summary>
-    public class WeakLaser : Laser
+    public class LightLaser : Laser
     {
-        public WeakLaser(Vector2 position, float rotation) : base(position, rotation)
+        public LightLaser(Vector2 position, float rotation) : base(position, rotation)
         {
             Damage = 1;
             LinearVelocity = 500f;
-            Texture = TextureHolder.LaserTextures["tiny"];
+            Texture = TextureHolder.Textures["bullet_light"];
         }
     }
 
@@ -83,20 +85,20 @@ namespace Astroids_Remake.Components.Entities.Laser
         {
             Damage = 2;
             LinearVelocity = 750f;
-            Texture = TextureHolder.LaserTextures["medium"];
+            Texture = TextureHolder.Textures["bullet_medium"];
         }
     }
 
     /// <summary>
     /// Describes a strong laser entity.
     /// </summary>
-    public class StrongLaser : Laser
+    public class HeavyLaser : Laser
     {
-        public StrongLaser(Vector2 position, float rotation) : base(position, rotation)
+        public HeavyLaser(Vector2 position, float rotation) : base(position, rotation)
         {
             Damage = 3;
             LinearVelocity = 1000f;
-            Texture = TextureHolder.LaserTextures["strong"];
+            Texture = TextureHolder.Textures["bullet_heavy"];
         }
     }
 }

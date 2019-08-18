@@ -8,6 +8,6 @@ namespace Astroids_Remake.Systems
 {
     public interface ISystem
     {
-
+        void Update(float deltaTime);
     }
 }

@@ -40,6 +40,7 @@ namespace Astroids_Remake.Components.Entities.Player
         public Vector2 Position { get; set; }
         public Vector2 Origin => new Vector2(Texture.Width / 2, Texture.Height / 2);
         public Vector2 Direction => new Vector2((float)Math.Cos(MathHelper.ToRadians(90) - Rotation), -(float)Math.Sin(MathHelper.ToRadians(90) - Rotation));
+        public Circle BoundingCircle => new Circle(Position, Texture.Width / 2);
 
         public override void Update(float deltaTime)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Astroids_Remake.Extra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;

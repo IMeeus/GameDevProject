@@ -1,7 +1,9 @@
 ﻿using Astroids_Remake.Extra;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,7 +116,7 @@ namespace Astroids_Remake.Components.Entities.Meteor
                 if (meteor is MediumMeteor)
                     newMeteors.Add(CreateMeteor(MeteorType.SMALL, meteor.Position, newDirection, inject));
                 if (meteor is BigMeteor)
-                    newMeteors.Add(CreateMeteor(MeteorType.BIG, meteor.Position, newDirection, inject));
+                    newMeteors.Add(CreateMeteor(MeteorType.MEDIUM, meteor.Position, newDirection, inject));
             }
 
             return newMeteors;

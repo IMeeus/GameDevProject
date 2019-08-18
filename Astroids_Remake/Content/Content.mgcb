@@ -73,6 +73,30 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../../../../../Desktop/Asteroids/backgrounds/planet_red.png;planet_red.png
 
+#begin ../../../../../../../../../Desktop/Asteroids/explosions/explosion1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/explosions/explosion1.png;explosion1.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/lasers/bullet_heavy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/lasers/bullet_heavy.png;bullet_heavy.png
+
 #begin ../../../../../../../../../Desktop/Asteroids/lasers/bullet_light.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +108,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../../../../../../Desktop/Asteroids/lasers/bullet_light.png;bullet_light.png
+
+#begin ../../../../../../../../../Desktop/Asteroids/lasers/bullet_medium.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/lasers/bullet_medium.png;bullet_medium.png
 
 #begin ../../../../../../../../../Desktop/Asteroids/meteors/meteor_big.png
 /importer:TextureImporter

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Astroids_Remake.Extra
+namespace Astroids_Remake.Tools
 {
     /// <summary>
     /// A tool that helps with vector operations.

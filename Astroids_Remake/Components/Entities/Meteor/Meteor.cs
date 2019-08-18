@@ -1,4 +1,5 @@
 ﻿using Astroids_Remake.Extra;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -41,9 +42,10 @@ namespace Astroids_Remake.Components.Entities.Meteor
         public float LinearVelocity { get; private set; }
         public float RotationVelocity { get; private set; }
         public Texture2D Texture { get; protected set; }
-        public Vector2 Position { get; private set; }
+        public Vector2 Position { get; set; }
         public Vector2 Origin => new Vector2(Texture.Width / 2, Texture.Height / 2);
         public Vector2 Direction { get; set; }
+        public Circle BoundingCircle => new Circle(Position, Radius);
 
         public override void Update(float deltaTime)
         {
@@ -104,7 +106,7 @@ namespace Astroids_Remake.Components.Entities.Meteor
         {
             Health = 1;
             Radius = 9;
-            Texture = TextureHolder.MeteorTextures["tiny"];
+            Texture = TextureHolder.Textures["meteor_tiny"];
         }
     }
 
@@ -117,7 +119,7 @@ namespace Astroids_Remake.Components.Entities.Meteor
         {
             Health = 2;
             Radius = 14;
-            Texture = TextureHolder.MeteorTextures["small"];
+            Texture = TextureHolder.Textures["meteor_small"];
         }
     }
 
@@ -130,7 +132,7 @@ namespace Astroids_Remake.Components.Entities.Meteor
         {
             Health = 4;
             Radius = 22;
-            Texture = TextureHolder.MeteorTextures["medium"];
+            Texture = TextureHolder.Textures["meteor_medium"];
         }
     }
 
@@ -143,7 +145,7 @@ namespace Astroids_Remake.Components.Entities.Meteor
         {
             Health = 8;
             Radius = 50;
-            Texture = TextureHolder.MeteorTextures["big"];
+            Texture = TextureHolder.Textures["meteor_big"];
         }
     }
 }
