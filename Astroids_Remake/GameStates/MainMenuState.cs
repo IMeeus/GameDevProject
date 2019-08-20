@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Astroids_Remake.Graphicals.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,28 +12,33 @@ namespace Astroids_Remake.GameStates
     /// <summary>
     /// Describes the behaviour of the game in its menu state.
     /// </summary>
-    public class MenuState : GameState
+    public class MainMenuState : GameState
     {
-        public MenuState(IGame game) : base(game) { }
+        private Menu _menu;
+
+        public MainMenuState(IGame game) : base(game) { }
 
         public override void Initialize()
         {
-            throw new NotImplementedException();
         }
 
         public override void LoadContent()
         {
-            throw new NotImplementedException();
+            _menu = new MainMenu(_game.Center, _game.Content.Load<SpriteFont>("font"), 3, 10, _game);
         }
 
         public override void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            _menu.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            _game.GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            _menu.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

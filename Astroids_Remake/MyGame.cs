@@ -15,6 +15,8 @@ namespace Astroids_Remake
         GraphicsDevice GraphicsDevice { get; }
         ContentManager Content { get; }
         Input Input { get; }
+
+        void Exit();
     }
 
     public interface IGameDimensions
@@ -26,9 +28,7 @@ namespace Astroids_Remake
 
     public interface IGameStates
     {
-        GameState CurrentState { get; }
-        GameState MenuState { get; }
-        GameState PlayingState { get; }
+        void SetState(GameState newState);
     }
 
     /// <summary>
@@ -44,8 +44,6 @@ namespace Astroids_Remake
         public Vector2 Center => new Vector2(ScreenWidth / 2, ScreenHeight / 2);
         public Input Input { get; private set; }
         public GameState CurrentState { get; private set; }
-        public GameState MenuState { get; private set; }
-        public GameState PlayingState { get; private set; }
 
         public MyGame()
         {
@@ -61,6 +59,8 @@ namespace Astroids_Remake
         /// </summary>
         protected override void Initialize()
         {
+            States = new Dictionary<string, GameState>();
+
             InitializeScreenSize();
             InitializeGameStates();
             InitializeInput();
@@ -87,10 +87,7 @@ namespace Astroids_Remake
         /// </summary>
         private void InitializeGameStates()
         {
-            MenuState = new MenuState(this);
-            PlayingState = new PlayingState(this);
-
-            CurrentState = PlayingState;
+            CurrentState = new PlayingState(this);
             CurrentState.Initialize();
         }
 
@@ -153,14 +150,14 @@ namespace Astroids_Remake
         }
 
         /// <summary>
-        /// Changes the state of the game.
+        /// Unloads the current content. Changes the state. Reinitialzes. Reloads the content.
         /// </summary>
-        /// <param name="newGameState">The new state of the game</param>
-        public void SetState(GameState newGameState)
+        /// <param name="newState">The new state of the game</param>
+        public void SetState(GameState newState)
         {
             UnloadContent();
 
-            CurrentState = newGameState;
+            CurrentState = newState;
             CurrentState.Initialize();
             CurrentState.LoadContent();
         }

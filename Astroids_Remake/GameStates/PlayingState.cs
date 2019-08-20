@@ -4,6 +4,8 @@ using Astroids_Remake.Components.Entities.Meteor;
 using Astroids_Remake.Components.Entities.Player;
 using Astroids_Remake.Components.Levels;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Graphicals;
+using Astroids_Remake.Graphicals.Overlay;
 using Astroids_Remake.Systems;
 using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
@@ -22,6 +24,9 @@ namespace Astroids_Remake.GameStates
     /// </summary>
     public class PlayingState : GameState
     {
+        private int _score;
+        private SpriteFont _font;
+
         // Entities
         private IEntityManager _entityManager;
         private IMeteorFactory _meteorFactory;
@@ -34,10 +39,15 @@ namespace Astroids_Remake.GameStates
         // Systems
         private ISystemManager _systemManager;
 
+        // Overlays
+        private Healthbar _healthbar;
+        private TextField _scoreBoard;
+
         public PlayingState(IGame game) : base(game) { }
 
         public override void Initialize()
         {
+            _score = 0;
             _entityManager = new EntityManager();
         }
 
@@ -45,10 +55,13 @@ namespace Astroids_Remake.GameStates
         {
             _game.Content.Unload();
 
+            _font = _game.Content.Load<SpriteFont>("font");
+
             LoadTextures();
             LoadPlayer();
             LoadLevels();
             LoadSystems();
+            LoadOverlays();
         }
 
         /// <summary>
@@ -68,6 +81,7 @@ namespace Astroids_Remake.GameStates
             TextureHolder.AddTexture("planet_blue", _game.Content.Load<Texture2D>("planet_blue"));
             TextureHolder.AddTexture("planet_brown", _game.Content.Load<Texture2D>("planet_brown"));
             TextureHolder.AddTexture("planet_red", _game.Content.Load<Texture2D>("planet_red"));
+            TextureHolder.AddTexture("healthbar", _game.Content.Load<Texture2D>("healthbar"));
         }
 
         /// <summary>
@@ -83,11 +97,20 @@ namespace Astroids_Remake.GameStates
             _levelManager.EnqueueLevel(_levelFactory.CreateLevel(LevelDifficulty.HARD));
         }
 
+        /// <summary>
+        /// Loads all game mechanics.
+        /// </summary>
         private void LoadSystems()
         {
             _systemManager = new SystemManager();
             _systemManager.AddSystem(new BorderSystem(_entityManager, _game));
             _systemManager.AddSystem(new CollisionSystem(_entityManager, _meteorFactory));
+        }
+
+        private void LoadOverlays()
+        {
+            _healthbar = new Healthbar(TextureHolder.Textures["healthbar"], Color.FromNonPremultiplied(255, 255, 255, 100), new Rectangle(20, 20, _game.ScreenWidth - 40, 20), _player);
+            _scoreBoard = new TextField(_game.Content.Load<SpriteFont>("font"), new Vector2(20, 50), 2f, Color.FromNonPremultiplied(255, 255, 255, 100));
         }
 
         /// <summary>
@@ -105,17 +128,24 @@ namespace Astroids_Remake.GameStates
 
         public override void Update(float deltaTime)
         {
+            if (_player.IsDestroyed)
+                _game.SetState("mainMenu");
+
             _entityManager.Update(deltaTime);
             _levelManager.Update(deltaTime);
             _systemManager.Update(deltaTime);
+            _healthbar.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             _game.GraphicsDevice.Clear(Color.Black);
+
             spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack);
             _entityManager.Draw(spriteBatch);
             _levelManager.Draw(spriteBatch);
+            _healthbar.Draw(spriteBatch);
+            _scoreBoard.Draw("Score: " + _score, spriteBatch);
             spriteBatch.End();
         }
     }

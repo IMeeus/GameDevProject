@@ -33,7 +33,8 @@ namespace Astroids_Remake.Systems
             List<Meteor> meteors = _entityManager.Entities.Where(e => e is Meteor).Cast<Meteor>().ToList();
             List<Laser> lasers = _entityManager.Entities.Where(e => e is Laser).Cast<Laser>().ToList();
 
-            HandlePlayerOutOfBounds(player);
+            if (player != null)
+                HandlePlayerOutOfBounds(player);
             foreach(Meteor meteor in meteors)
                 HandleMeteorOutOfBounds(meteor);
             foreach (Laser laser in lasers)

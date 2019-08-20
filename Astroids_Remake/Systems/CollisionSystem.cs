@@ -31,7 +31,8 @@ namespace Astroids_Remake.Systems
 
             foreach (Meteor meteor in meteors)
             {
-                HandlePlayerMeteorCollision(player, meteor);
+                if (player != null)
+                    HandlePlayerMeteorCollision(player, meteor);
 
                 foreach (Laser laser in lasers)
                     HandleLaserMeteorCollision(laser, meteor);
@@ -50,6 +51,7 @@ namespace Astroids_Remake.Systems
         {
             if (CollisionDetector.CheckCollision(player.BoundingCircle, meteor.BoundingCircle))
             {
+                player.Damage(1);
                 meteor.Destroy();
                 _entityManager.AddEntity(new Explosion(meteor.Position, meteor.BoundingCircle.Radius));
             }

@@ -14,5 +14,6 @@ namespace Astroids_Remake.Extra
     {
         public const float BACKGROUND = 0f;
         public const float MAIN = .1f;
+        public const float OVERLAY = .2f;
     }
 }

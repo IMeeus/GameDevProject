@@ -53,8 +53,16 @@
     <Compile Include="Components\Levels\LevelFactory.cs" />
     <Compile Include="Components\Levels\LevelManager.cs" />
     <Compile Include="Extra\Animation.cs" />
-    <Compile Include="Extra\Background.cs" />
+    <Compile Include="GameStates\ScoreState.cs" />
+    <Compile Include="GameStates\SettingsState.cs" />
+    <Compile Include="Graphicals\Background.cs" />
     <Compile Include="Extra\Circle.cs" />
+    <Compile Include="Graphicals\Menus\MainMenu.cs" />
+    <Compile Include="Graphicals\Menus\Menu.cs" />
+    <Compile Include="Graphicals\Healthbar.cs" />
+    <Compile Include="Graphicals\Menus\SettingsMenu.cs" />
+    <Compile Include="Graphicals\Scoreboard.cs" />
+    <Compile Include="Graphicals\TextField.cs" />
     <Compile Include="Systems\BorderSystem.cs" />
     <Compile Include="Systems\SystemManager.cs" />
     <Compile Include="Tools\CollisionDetector.cs" />
@@ -64,7 +72,7 @@
     <Compile Include="Tools\VectorHelper.cs" />
     <Compile Include="Input\Input.cs" />
     <Compile Include="Input\IControls.cs" />
-    <Compile Include="GameStates\MenuState.cs" />
+    <Compile Include="GameStates\MainMenuState.cs" />
     <Compile Include="GameStates\PlayingState.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GameStates\GameState.cs" />
@@ -87,6 +95,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

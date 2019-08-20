@@ -1,6 +1,7 @@
 ﻿using Astroids_Remake.Components.Entities;
 using Astroids_Remake.Components.Entities.Meteor;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Graphicals;
 using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -64,7 +65,7 @@ namespace Astroids_Remake.Components.Levels
 
         private Level CreateHardLevel()
         {
-            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.Textures["planet_red"], ScreenLocation.TOPRIGHT, _gameDimensions));
+            Level level = new MeteorLevel(_entityManager, new Background(TextureHolder.Textures["planet_red"], ScreenLocation.BOTTOMRIGHT, _gameDimensions));
 
             for (int i = 0; i < 8; i++)
                 level.AddEntity(_meteorFactory.CreateMeteor(MeteorType.BIG, false));

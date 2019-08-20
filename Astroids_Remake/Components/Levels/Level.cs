@@ -1,6 +1,7 @@
 ﻿using Astroids_Remake.Components.Entities;
 using Astroids_Remake.Components.Entities.Meteor;
 using Astroids_Remake.Extra;
+using Astroids_Remake.Graphicals;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;

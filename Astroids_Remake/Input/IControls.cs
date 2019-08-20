@@ -13,7 +13,6 @@ namespace Astroids_Remake.GameLogic.Input
         Keys DownKey { get; }
         Keys LeftKey { get; }
         Keys RightKey { get; }
-        Keys ShootKey { get; }
     }
 
     /// <summary>
@@ -22,14 +21,9 @@ namespace Astroids_Remake.GameLogic.Input
     public class AzertyControls : IControls
     {
         public Keys UpKey => Keys.Z;
-
         public Keys DownKey => Keys.S;
-
         public Keys LeftKey => Keys.Q;
-
         public Keys RightKey => Keys.D;
-
-        public Keys ShootKey => Keys.Space;
     }
 
     /// <summary>
@@ -38,14 +32,9 @@ namespace Astroids_Remake.GameLogic.Input
     public class QwertyControls : IControls
     {
         public Keys UpKey => Keys.W;
-
         public Keys DownKey => Keys.S;
-
         public Keys LeftKey => Keys.A;
-
         public Keys RightKey => Keys.D;
-
-        public Keys ShootKey => Keys.Space;
     }
 
     /// <summary>
@@ -54,13 +43,8 @@ namespace Astroids_Remake.GameLogic.Input
     public class ArrowControls : IControls
     {
         public Keys UpKey => Keys.Up;
-
         public Keys DownKey => Keys.Down;
-
         public Keys LeftKey => Keys.Left;
-
         public Keys RightKey => Keys.Right;
-
-        public Keys ShootKey => Keys.Space;
     }
 }

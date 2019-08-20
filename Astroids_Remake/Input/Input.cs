@@ -13,8 +13,8 @@ namespace Astroids_Remake.GameLogic.Input
         bool DownHold { get; }
         bool LeftHold { get; }
         bool RightHold { get; }
-        bool ShootHold { get; }
-        bool ShootPress { get; }
+        bool SpaceHold { get; }
+        bool SpacePress { get; }
         void Update();
         void SetControls(IControls newControls);
     }
@@ -33,11 +33,15 @@ namespace Astroids_Remake.GameLogic.Input
         }
 
         public bool UpHold => _keyState.IsKeyDown(_controls.UpKey);
+        public bool UpPress => _keyState.IsKeyDown(_controls.UpKey) && !_oldKeyState.IsKeyDown(_controls.UpKey);
         public bool DownHold => _keyState.IsKeyDown(_controls.DownKey);
+        public bool DownPress => _keyState.IsKeyDown(_controls.DownKey) && !_oldKeyState.IsKeyDown(_controls.DownKey);
         public bool LeftHold => _keyState.IsKeyDown(_controls.LeftKey);
         public bool RightHold => _keyState.IsKeyDown(_controls.RightKey);
-        public bool ShootHold => _keyState.IsKeyDown(_controls.ShootKey);
-        public bool ShootPress => _keyState.IsKeyDown(_controls.ShootKey) && !_oldKeyState.IsKeyDown(_controls.ShootKey);
+        public bool SpaceHold => _keyState.IsKeyDown(Keys.Space);
+        public bool SpacePress => _keyState.IsKeyDown(Keys.Space) && !_oldKeyState.IsKeyDown(Keys.Space);
+        public bool EnterHold => _keyState.IsKeyDown(Keys.Enter);
+        public bool EnterPress => _keyState.IsKeyDown(Keys.Enter) && !_oldKeyState.IsKeyDown(Keys.Enter); 
 
         /// <summary>
         /// Updates the old and new keyboard state.

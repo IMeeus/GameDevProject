@@ -25,6 +25,8 @@ namespace Astroids_Remake.Components.Entities.Player
             _input = input;
             _laserFactory = laserFactory;
 
+            MaxHealth = 10;
+            Health = MaxHealth;
             Texture = texture;
             Rotation = 0f;
             ShootCooldown = 0f;
@@ -32,6 +34,8 @@ namespace Astroids_Remake.Components.Entities.Player
             RotationVelocity = 180f;
         }
 
+        public int MaxHealth { get; private set; }
+        public int Health { get; private set; }
         public float Rotation { get; private set; }
         public float ShootCooldown { get; private set; }
         public float LinearVelocity { get; private set; }
@@ -78,7 +82,7 @@ namespace Astroids_Remake.Components.Entities.Player
                 Position += Direction * LinearVelocity * deltaTime;
             if (_input.DownHold)
                 Position -= Direction * LinearVelocity * deltaTime;
-            if (_input.ShootHold)
+            if (_input.SpaceHold)
                 Shoot();
         }
 
@@ -92,6 +96,14 @@ namespace Astroids_Remake.Components.Entities.Player
 
             _laserFactory.SpawnLaser(LaserType.STRONG, Position, Rotation);
             ShootCooldown = .2f;
+        }
+
+        public void Damage(int damage)
+        {
+            Health -= damage;
+
+            if (Health <= 0)
+                Destroy();
         }
     }
 }

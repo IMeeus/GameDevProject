@@ -85,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../../../../../Desktop/Asteroids/explosions/explosion1.png;explosion1.png
 
+#begin ../../../../../../../../../Desktop/Asteroids/healthbar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../../../../Desktop/Asteroids/healthbar.png;healthbar.png
+
 #begin ../../../../../../../../../Desktop/Asteroids/lasers/bullet_heavy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -180,4 +192,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../../../../../../Desktop/Asteroids/player.png;player.png
+
+#begin font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font.spritefont
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Astroids_Remake.Extra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Astroids_Remake.Extra
+namespace Astroids_Remake.Graphicals
 {
     public interface IBackground
     {
