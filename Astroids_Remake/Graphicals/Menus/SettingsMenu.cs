@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Astroids_Remake.GameLogic.Input;
+using Astroids_Remake.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -54,7 +55,7 @@ namespace Astroids_Remake.Graphicals.Menus
 
         private void GoToMainMenu()
         {
-            _game.SetState("mainMenu");
+            _game.SetState(new MainMenuState(_game));
         }
     }
 }

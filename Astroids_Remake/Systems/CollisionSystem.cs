@@ -16,11 +16,13 @@ namespace Astroids_Remake.Systems
     {
         private readonly IEntityManager _entityManager;
         private readonly IMeteorFactory _meteorFactory;
+        private readonly IGameScore _gameScore;
 
-        public CollisionSystem(IEntityManager entityManager, IMeteorFactory meteorFactory)
+        public CollisionSystem(IEntityManager entityManager, IMeteorFactory meteorFactory, IGameScore gameScore)
         {
             _entityManager = entityManager;
             _meteorFactory = meteorFactory;
+            _gameScore = gameScore;
         }
 
         public void Update(float deltaTime)
@@ -78,6 +80,7 @@ namespace Astroids_Remake.Systems
         /// <param name="meteor">The meteor that has been destroyed.</param>
         private void HandleMeteorDestuction(Meteor meteor)
         {
+            _gameScore.Score++;
             if (meteor is TinyMeteor) return;
             _meteorFactory.SplitMeteor(meteor, true);
         }

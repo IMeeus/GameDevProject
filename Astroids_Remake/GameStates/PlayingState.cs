@@ -22,9 +22,8 @@ namespace Astroids_Remake.GameStates
     /// <summary>
     /// Describes the behaviour of the game in its playing state.
     /// </summary>
-    public class PlayingState : GameState
+    public class PlayingState : GameState, IGameScore
     {
-        private int _score;
         private SpriteFont _font;
 
         // Entities
@@ -43,11 +42,13 @@ namespace Astroids_Remake.GameStates
         private Healthbar _healthbar;
         private TextField _scoreBoard;
 
+        public int Score { get; set; }
+
         public PlayingState(IGame game) : base(game) { }
 
         public override void Initialize()
         {
-            _score = 0;
+            Score = 0;
             _entityManager = new EntityManager();
         }
 
@@ -65,7 +66,7 @@ namespace Astroids_Remake.GameStates
         }
 
         /// <summary>
-        /// Initialiseert de properties van de statische klasse TextureHolder, zodat alle textures overal bereikbaar worden.
+        /// Loads in all textures for this state.
         /// </summary>
         private void LoadTextures()
         {
@@ -104,7 +105,7 @@ namespace Astroids_Remake.GameStates
         {
             _systemManager = new SystemManager();
             _systemManager.AddSystem(new BorderSystem(_entityManager, _game));
-            _systemManager.AddSystem(new CollisionSystem(_entityManager, _meteorFactory));
+            _systemManager.AddSystem(new CollisionSystem(_entityManager, _meteorFactory, this));
         }
 
         private void LoadOverlays()
@@ -129,7 +130,7 @@ namespace Astroids_Remake.GameStates
         public override void Update(float deltaTime)
         {
             if (_player.IsDestroyed)
-                _game.SetState("mainMenu");
+                _game.SetState(new ScoreState(_game, Score));
 
             _entityManager.Update(deltaTime);
             _levelManager.Update(deltaTime);
@@ -145,7 +146,7 @@ namespace Astroids_Remake.GameStates
             _entityManager.Draw(spriteBatch);
             _levelManager.Draw(spriteBatch);
             _healthbar.Draw(spriteBatch);
-            _scoreBoard.Draw("Score: " + _score, spriteBatch);
+            _scoreBoard.Draw(spriteBatch, "Score: " + Score, false);
             spriteBatch.End();
         }
     }

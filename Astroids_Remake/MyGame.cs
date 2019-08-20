@@ -1,6 +1,7 @@
 ﻿using Astroids_Remake.Extra;
 using Astroids_Remake.GameLogic.Input;
 using Astroids_Remake.GameStates;
+using Astroids_Remake.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,6 +32,11 @@ namespace Astroids_Remake
         void SetState(GameState newState);
     }
 
+    public interface IGameScore
+    {
+        int Score { get; set; }
+    }
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -59,8 +65,6 @@ namespace Astroids_Remake
         /// </summary>
         protected override void Initialize()
         {
-            States = new Dictionary<string, GameState>();
-
             InitializeScreenSize();
             InitializeGameStates();
             InitializeInput();
@@ -87,7 +91,7 @@ namespace Astroids_Remake
         /// </summary>
         private void InitializeGameStates()
         {
-            CurrentState = new PlayingState(this);
+            CurrentState = new MainMenuState(this);
             CurrentState.Initialize();
         }
 
@@ -107,11 +111,9 @@ namespace Astroids_Remake
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             CurrentState.LoadContent();
         }
-
-        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -119,6 +121,7 @@ namespace Astroids_Remake
         /// </summary>
         protected override void UnloadContent()
         {
+            TextureHolder.Clear();
             Content.Unload();
         }
 
@@ -150,9 +153,9 @@ namespace Astroids_Remake
         }
 
         /// <summary>
-        /// Unloads the current content. Changes the state. Reinitialzes. Reloads the content.
+        /// Changes the state of the game.
         /// </summary>
-        /// <param name="newState">The new state of the game</param>
+        /// <param name="newGameState">The new state of the game</param>
         public void SetState(GameState newState)
         {
             UnloadContent();

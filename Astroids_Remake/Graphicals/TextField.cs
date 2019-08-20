@@ -29,9 +29,14 @@ namespace Astroids_Remake.Graphicals
         /// </summary>
         /// <param name="score">The score which you want to draw.</param>
         /// <param name="spriteBatch">The spritebatch that is used to draw on the screen.</param>
-        public void Draw(string text, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, string text, bool centered)
         {
-            spriteBatch.DrawString(_font, text, _position, _color, 0f, Vector2.Zero, _scale, SpriteEffects.None, LayerDepth.OVERLAY);
+            Vector2 origin = Vector2.Zero;
+
+            if (centered)
+                origin = new Vector2(_font.MeasureString(text).X / 2, _font.MeasureString(text).Y / 2);
+
+            spriteBatch.DrawString(_font, text, _position, _color, 0f, origin, _scale, SpriteEffects.None, LayerDepth.OVERLAY);
         }
     }
 }
